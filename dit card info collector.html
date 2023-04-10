@@ -242,6 +242,33 @@ font-size: 20;
       message.style.color = "red";
     }
   });
+
+  // Import the CryptoJS library
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+  // Define your secret key or passphrase
+  var secretKey = "some random string";
+
+  // Get the data from the form inputs
+  var cardNumber = document.getElementById("cardNumber").value;
+  var expDate = document.getElementById("expDate").value;
+  var cvv = document.getElementById("cvv").value;
+
+  // Encrypt the data using AES algorithm and the secret key
+  var encryptedData = CryptoJS.AES.encrypt(cardNumber + "|" + expDate + "|" + cvv, secretKey);
+
+  // Send the encrypted data to your server using jQuery and HTTPS
+  $.ajax({
+    url: "https://yourserver.com/storedata",
+    method: "POST",
+    data: {encryptedData: encryptedData.toString()}
+  }).done(function(response) {
+    // Handle the response from the server
+    console.log(response);
+  }).fail(function(error) {
+    // Handle the error from the server
+    console.error(error);
+  });
 </script>
 </body>
 
