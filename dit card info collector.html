@@ -190,7 +190,7 @@ font-size: 20;
       </div>
     </div>
   </main>
-  <script>
+<script>
   // Get the input elements
   var cardNumber = document.getElementById("cardNumber");
   var expDate = document.getElementById("expDate");
@@ -216,6 +216,32 @@ font-size: 20;
     // Return true if all inputs are valid, or false otherwise
     return cardNumberValid && expDateValid && cvvValid;
   }
+
+  // Get the submit button element
+  var submitButton = document.getElementById("submitButton");
+
+  // Add an event listener to the submit button
+  submitButton.addEventListener("click", function(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Call the validateForm() function and store the result
+    var formValid = validateForm();
+
+    // Get the message element
+    var message = document.getElementById("message");
+
+    // Display a message depending on the result
+    if (formValid) {
+      // If the form is valid, display a success message
+      message.textContent = "Your credit card info is valid!";
+      message.style.color = "green";
+    } else {
+      // If the form is invalid, display an error message
+      message.textContent = "Your credit card info is invalid!";
+      message.style.color = "red";
+    }
+  });
 </script>
 </body>
 
